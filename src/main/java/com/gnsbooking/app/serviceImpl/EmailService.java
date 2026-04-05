@@ -11,6 +11,9 @@ import jakarta.mail.internet.MimeMessage;
 @Service
 public class EmailService {
 
+	@Value("${spring.mail.username}")
+	private String adminEmail;
+
     private final JavaMailSender mailSender;
 
     public EmailService(JavaMailSender mailSender) {
@@ -23,9 +26,10 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setTo(to);
+			helper.setFrom(adminEmail);
             helper.setSubject(subject);
             helper.setText(body, true); // HTML enabled
-
+			
             mailSender.send(message);
 
         } catch (Exception e) {
