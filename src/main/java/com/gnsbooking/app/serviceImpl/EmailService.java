@@ -25,7 +25,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             helper.setTo(to);
-			helper.setFrom(adminEmail);
+			helper.setFrom("ticket4naach@gmail.com");
             helper.setSubject(subject);
             helper.setText(body, true); // HTML enabled
 			
