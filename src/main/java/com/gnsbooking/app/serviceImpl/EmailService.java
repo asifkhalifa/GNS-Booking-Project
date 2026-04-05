@@ -1,11 +1,10 @@
 package com.gnsbooking.app.serviceImpl;
 
 import java.util.List;
-
 import org.springframework.mail.javamail.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
+import org.springframework.beans.factory.annotation.Value;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
