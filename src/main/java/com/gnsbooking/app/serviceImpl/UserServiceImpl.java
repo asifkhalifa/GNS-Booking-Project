@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserServiceI {
 		String otp = String.valueOf((int)(Math.random() * 900000) + 100000);
 
 		// Save OTP in Redis (5 min expiry)
-		// redisTemplate.opsForValue().set("OTP:" + email, otp, Duration.ofMinutes(5));
+		redisTemplate.opsForValue().set("OTP:" + email, otp, Duration.ofMinutes(5));
 		
 		// Send email
 		emailService.sendOtpEmail(email, otp);
