@@ -63,6 +63,12 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-ses</artifactId>
+		    <version>1.12.767</version>
+		</dependency>
+
         <!-- 🔹 Swagger (Springdoc for Spring Boot 3) -->
         <dependency>
             <groupId>org.springdoc</groupId>
