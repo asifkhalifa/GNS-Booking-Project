@@ -1,6 +1,8 @@
 package com.gnsbooking.app.serviceImpl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,17 +24,32 @@ public class SeatServiceImpl implements SeatServiceI {
 	
 	@Override
 	public List<SeatResponse> getAllSeats() {
-	    List<SeatEntity> seats = seatRepository.findAll();
 
+	    List<SeatEntity> seats = seatRepository.findAll();
 	    if (seats == null || seats.isEmpty()) {
-	        return List.of();  // ✅ always return empty list
+	        return List.of();
 	    }
 
-	    return seats.stream().map(seat -> {
-	        String finalStatus = seat.getStatus();
-	        if (redisTemplate.hasKey("seat:" + seat.getSeatNumber())) {
-	            finalStatus = "LOCKED";
+	    // Step 1: Prepare all Redis keys
+	    List<String> keys = seats.stream()
+	            .map(seat -> "seat:" + seat.getSeatNumber())
+	            .toList();
+
+	    // Step 2: Bulk fetch from Redis
+	    List<Object> redisValues = redisTemplate.opsForValue().multiGet(keys);
+
+	    // Step 3: Convert to Set for fast lookup
+	    Set<String> lockedSeats = new HashSet<>();
+	    for (int i = 0; i < keys.size(); i++) {
+	        if (redisValues.get(i) != null) {
+	            lockedSeats.add(keys.get(i));
 	        }
+	    }
+
+	    // Step 4: Map response
+	    return seats.stream().map(seat -> {
+	        String key = "seat:" + seat.getSeatNumber();
+	        String finalStatus = lockedSeats.contains(key) ? "LOCKED" : seat.getStatus();
 
 	        return new SeatResponse(
 	                seat.getSeatNumber(),
@@ -41,7 +58,6 @@ public class SeatServiceImpl implements SeatServiceI {
 	                seat.getPrice(),
 	                finalStatus
 	        );
-
 	    }).toList();
 	}
 
