@@ -7,7 +7,7 @@
 
     <groupId>com.gns</groupId>
     <artifactId>otp-login</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>otp-login</name>
     <description>OTP Login System with Redis, PostgreSQL and Email</description>
 
