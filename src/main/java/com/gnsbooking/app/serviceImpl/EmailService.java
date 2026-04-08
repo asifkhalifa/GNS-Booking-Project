@@ -47,6 +47,7 @@ public class EmailService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("api-key", apiKey);
+			headers.set("accept", "application/json");
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, Object>> request =
@@ -79,6 +80,7 @@ public class EmailService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("api-key", apiKey);
+			headers.set("accept", "application/json");
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, Object>> request =
@@ -112,6 +114,7 @@ public class EmailService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("api-key", apiKey);
+			headers.set("accept", "application/json");
             headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<Map<String, Object>> request =
