@@ -123,6 +123,79 @@ public class EmailTemplate {
 		       "</div></body></html>";
 	}
 	
+	public String cancelTicketToUserTemplate(Long bookingId, List<String> seats, int amount) {
+		String userHtml = "<html>" +
+		        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
+
+		        "<div style='max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:10px;'>" +
+
+		        "<h2 style='color:#2c3e50;'>Seat Cancellation Confirmation</h2>" +
+
+		        "<p>Dear User,</p>" +
+
+		        "<p>Your requested seats have been <b style='color:red;'>cancelled</b> successfully.</p>" +
+
+		        "<table style='width:100%; border-collapse:collapse; margin-top:15px;'>" +
+		        "<tr><td><b>Booking ID:</b></td><td>" + bookingId + "</td></tr>" +
+		        "<tr><td><b>Seats:</b></td><td>" + seats + "</td></tr>" +
+		        "<tr><td><b>Refund:</b></td><td>₹" + amount + "</td></tr>" +
+		        "</table>" +
+
+		        "<p style='margin-top:20px;'>If you have any questions, contact support.</p>" +
+
+		        "<p>Thanks,<br><b>Your Booking Team</b></p>" +
+
+		        "</div></body></html>";
+		
+		return userHtml;
+	}
+	
+	public String cancelTicketToAdminTemplate(Long bookingId, List<String> seats, int amount, String userEmail) {
+		String adminHtml = "<html>" +
+		        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
+
+		        "<div style='max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px;'>" +
+
+		        "<h2 style='color:#e67e22;'>Seat Cancellation - Admin Notification</h2>" +
+
+		        "<p>Hello Admin,</p>" +
+
+		        "<p>The following seats have been <b style='color:red;'>cancelled</b> " +
+		        "<b>as per the user's request</b>.</p>" +
+
+		        "<table style='width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;'>" +
+
+		        "<tr>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>User Email</b></td>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + userEmail + "</td>" +
+		        "</tr>" +
+
+		        "<tr>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Booking ID</b></td>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" +bookingId + "</td>" +
+		        "</tr>" +
+
+		        "<tr>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Cancelled Seats</b></td>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + seats + "</td>" +
+		        "</tr>" +
+
+		        "<tr>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Total Refund</b></td>" +
+		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>₹" + amount + "</td>" +
+		        "</tr>" +
+
+		        "</table>" +
+
+		        "<p style='margin-top:20px;'>This action was processed successfully in the system.</p>" +
+
+		        "<p style='margin-top:30px;'>Regards,<br><b>Booking System</b></p>" +
+
+		        "</div></body></html>";
+		
+		return adminHtml;
+	}
+	
 	
 
 }

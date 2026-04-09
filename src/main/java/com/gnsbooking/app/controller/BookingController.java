@@ -79,15 +79,12 @@ public class BookingController {
 	 }
 	 
 	 @PostMapping("/cancel-seats")
-	    public ResponseEntity<?> cancelSeats(@RequestBody CancelSeatsRequest request) {
-
-	        try {
-	            String response = bookingServiceI.cancelSeats(request);
-	            return ResponseEntity.ok(response);
-
-	        } catch (Exception e) {
-	            return ResponseEntity.badRequest().body(e.getMessage());
-	        }
-	    }
-
+	 public ResponseEntity<?> cancelSeats(@RequestBody CancelSeatsRequest request) {	
+		 try {
+			 String response = bookingServiceI.cancelSeats(request);
+			 return ResponseEntity.ok(response);
+		 } catch (Exception e) {
+			 return ResponseEntity.badRequest().body(e.getMessage());
+		 }
+	 }
 }

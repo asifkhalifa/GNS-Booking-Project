@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.gnsbooking.app.entity.BookingEntity;
 import com.gnsbooking.app.utility.EmailTemplate;
 
 @Service
@@ -93,7 +95,6 @@ public class EmailService {
         }
     }
     
-
     @Async
 	public void sendTickets(Long bkngId, List<String> seats, int totalAmount, String email) {
     	try {
@@ -126,4 +127,68 @@ public class EmailService {
             throw new RuntimeException("Email sending failed: " + e.getMessage());
         }
     }
+    
+    @Async
+	public void sendBookingCancelToUser(BookingEntity booking, int refundAmount, List<String> seatNmbrs) {
+    	try {
+            RestTemplate restTemplate = new RestTemplate();
+
+            Map<String, Object> body = new HashMap<>();
+
+            Map<String, String> sender = new HashMap<>();
+            sender.put("name", "GNS Booking");
+            sender.put("email", "ticket4naach@gmail.com");
+
+            Map<String, String> to = new HashMap<>();
+            to.put("email", booking.getUser().getEmail());
+            body.put("sender", sender);
+            body.put("to", Collections.singletonList(to));
+            body.put("subject", "Booking Update: Seats Cancelled & Refund Initiated (ID: " + booking.getBkngId() + ")");
+            body.put("htmlContent", emailTemplate.cancelTicketToUserTemplate(booking.getBkngId(), seatNmbrs, refundAmount));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("api-key", apiKey);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Map<String, Object>> request =
+                    new HttpEntity<>(body, headers);
+
+            ResponseEntity<String> response =
+                    restTemplate.postForEntity(URL, request, String.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Email sending failed: " + e.getMessage());
+        }
+	}
+    
+    @Async
+	public void sendBookingCancelToAdmin(BookingEntity booking, int refundAmount, List<String> seatNmbrs) {
+    	try {
+            RestTemplate restTemplate = new RestTemplate();
+
+            Map<String, Object> body = new HashMap<>();
+
+            Map<String, String> sender = new HashMap<>();
+            sender.put("name", "GNS Booking");
+            sender.put("email", "ticket4naach@gmail.com");
+
+            Map<String, String> to = new HashMap<>();
+            to.put("email", booking.getUser().getEmail());
+            body.put("sender", sender);
+            body.put("to", Collections.singletonList(to));
+            body.put("subject", "Admin Alert: Seats Cancelled as per User Request (Booking ID: " + booking.getBkngId() + ")");
+            body.put("htmlContent", emailTemplate.cancelTicketToAdminTemplate(booking.getBkngId(), seatNmbrs, refundAmount, booking.getUser().getEmail()));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("api-key", apiKey);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<Map<String, Object>> request =
+                    new HttpEntity<>(body, headers);
+
+            ResponseEntity<String> response =
+                    restTemplate.postForEntity(URL, request, String.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Email sending failed: " + e.getMessage());
+        }		
+	}
 }

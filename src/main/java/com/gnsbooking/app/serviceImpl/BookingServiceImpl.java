@@ -359,6 +359,8 @@ public class BookingServiceImpl implements BookingServiceI {
 		 // 🔥 UPDATE BOOKING TOTAL
 		 booking.setTotalAmount(booking.getTotalAmount() - refundAmount);
 		 bookingRepository.save(booking);
+		 emailService.sendBookingCancelToUser(booking,refundAmount,request.getSeatNmbrs());
+		 emailService.sendBookingCancelToAdmin(booking,refundAmount,request.getSeatNmbrs());
 		 return "Seats cancelled successfully. Refund amount: " + refundAmount;
 	 }
 }
