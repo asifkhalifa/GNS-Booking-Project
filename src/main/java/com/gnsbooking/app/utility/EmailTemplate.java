@@ -143,7 +143,7 @@ public class EmailTemplate {
 
 		        "<p style='margin-top:20px;'>If you have any questions, contact support.</p>" +
 
-		        "<p>Thanks,<br><b>Your Booking Team</b></p>" +
+		        "<p>Thanks,<br><b>GNS Team</b></p>" +
 
 		        "</div></body></html>";
 		
@@ -189,7 +189,7 @@ public class EmailTemplate {
 
 		        "<p style='margin-top:20px;'>This action was processed successfully in the system.</p>" +
 
-		        "<p style='margin-top:30px;'>Regards,<br><b>Booking System</b></p>" +
+		        "<p style='margin-top:30px;'>Regards,<br><b>GNS Team</b></p>" +
 
 		        "</div></body></html>";
 		
