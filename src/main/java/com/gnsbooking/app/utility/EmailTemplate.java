@@ -123,78 +123,168 @@ public class EmailTemplate {
 		       "</div></body></html>";
 	}
 	
+	// public String cancelTicketToUserTemplate(Long bookingId, List<String> seats, int amount) {
+	// 	String userHtml = "<html>" +
+	// 	        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
+
+	// 	        "<div style='max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:10px;'>" +
+
+	// 	        "<h2 style='color:#2c3e50;'>Seat Cancellation Confirmation</h2>" +
+
+	// 	        "<p>Dear User,</p>" +
+
+	// 	        "<p>Your requested seats have been <b style='color:red;'>cancelled</b> successfully.</p>" +
+
+	// 	        "<table style='width:100%; border-collapse:collapse; margin-top:15px;'>" +
+	// 	        "<tr><td><b>Booking ID:</b></td><td>" + bookingId + "</td></tr>" +
+	// 	        "<tr><td><b>Seats:</b></td><td>" + seats + "</td></tr>" +
+	// 	        "<tr><td><b>Refund:</b></td><td>₹" + amount + "</td></tr>" +
+	// 	        "</table>" +
+
+	// 	        "<p style='margin-top:20px;'>If you have any questions, contact support.</p>" +
+
+	// 	        "<p>Thanks,<br><b>GNS Team</b></p>" +
+
+	// 	        "</div></body></html>";
+		
+	// 	return userHtml;
+	// }
+
 	public String cancelTicketToUserTemplate(Long bookingId, List<String> seats, int amount) {
-		String userHtml = "<html>" +
-		        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
 
-		        "<div style='max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:10px;'>" +
+    String seatDetails = String.join(", ", seats);
 
-		        "<h2 style='color:#2c3e50;'>Seat Cancellation Confirmation</h2>" +
+    String userHtml = "<html>" +
+            "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
 
-		        "<p>Dear User,</p>" +
+            "<div style='max-width:600px; margin:auto; background:#fff; padding:20px; border-radius:10px;'>" +
 
-		        "<p>Your requested seats have been <b style='color:red;'>cancelled</b> successfully.</p>" +
+            "<h2 style='color:#2c3e50;'>Seat Cancellation Confirmation</h2>" +
 
-		        "<table style='width:100%; border-collapse:collapse; margin-top:15px;'>" +
-		        "<tr><td><b>Booking ID:</b></td><td>" + bookingId + "</td></tr>" +
-		        "<tr><td><b>Seats:</b></td><td>" + seats + "</td></tr>" +
-		        "<tr><td><b>Refund:</b></td><td>₹" + amount + "</td></tr>" +
-		        "</table>" +
+            "<p>Dear User,</p>" +
 
-		        "<p style='margin-top:20px;'>If you have any questions, contact support.</p>" +
+            "<p>Your requested seats have been <b style='color:red;'>cancelled</b> successfully.</p>" +
 
-		        "<p>Thanks,<br><b>GNS Team</b></p>" +
+            "<table style='width:100%; border-collapse:collapse; margin-top:15px;'>" +
+            "<tr><td><b>Booking ID:</b></td><td>" + bookingId + "</td></tr>" +
+            "<tr><td><b>Seats:</b></td><td>" + seatDetails + "</td></tr>" +
+            "<tr><td><b>Refund:</b></td><td>₹" + amount + "</td></tr>" +
+            "</table>" +
 
-		        "</div></body></html>";
-		
-		return userHtml;
-	}
+            // 🔥 ADDED LINE
+            "<p style='margin-top:15px; color:#555; font-size:13px;'>" +
+            "Note: Refund is subject to payment status." +
+            "</p>" +
+
+            "<p style='margin-top:20px;'>If you have any questions, contact support.</p>" +
+
+            "<p>Thanks,<br><b>GNS Team</b></p>" +
+
+            "</div></body></html>";
+
+    return userHtml;
+}
 	
-	public String cancelTicketToAdminTemplate(Long bookingId, List<String> seats, int amount, String userEmail) {
-		String adminHtml = "<html>" +
-		        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
+	// public String cancelTicketToAdminTemplate(Long bookingId, List<String> seats, int amount, String userEmail) {
+	// 	String adminHtml = "<html>" +
+	// 	        "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
 
-		        "<div style='max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px;'>" +
+	// 	        "<div style='max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px;'>" +
 
-		        "<h2 style='color:#e67e22;'>Seat Cancellation - Admin Notification</h2>" +
+	// 	        "<h2 style='color:#e67e22;'>Seat Cancellation - Admin Notification</h2>" +
 
-		        "<p>Hello Admin,</p>" +
+	// 	        "<p>Hello Admin,</p>" +
 
-		        "<p>The following seats have been <b style='color:red;'>cancelled</b> " +
-		        "<b>as per the user's request</b>.</p>" +
+	// 	        "<p>The following seats have been <b style='color:red;'>cancelled</b> " +
+	// 	        "<b>as per the user's request</b>.</p>" +
 
-		        "<table style='width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;'>" +
+	// 	        "<table style='width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;'>" +
 
-		        "<tr>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>User Email</b></td>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + userEmail + "</td>" +
-		        "</tr>" +
+	// 	        "<tr>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>User Email</b></td>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + userEmail + "</td>" +
+	// 	        "</tr>" +
 
-		        "<tr>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Booking ID</b></td>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" +bookingId + "</td>" +
-		        "</tr>" +
+	// 	        "<tr>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Booking ID</b></td>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" +bookingId + "</td>" +
+	// 	        "</tr>" +
 
-		        "<tr>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Cancelled Seats</b></td>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + seats + "</td>" +
-		        "</tr>" +
+	// 	        "<tr>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Cancelled Seats</b></td>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + seats + "</td>" +
+	// 	        "</tr>" +
 
-		        "<tr>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Total Refund</b></td>" +
-		        "<td style='padding:8px; border-bottom:1px solid #ddd;'>₹" + amount + "</td>" +
-		        "</tr>" +
+	// 	        "<tr>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Total Refund</b></td>" +
+	// 	        "<td style='padding:8px; border-bottom:1px solid #ddd;'>₹" + amount + "</td>" +
+	// 	        "</tr>" +
 
-		        "</table>" +
+	// 	        "</table>" +
+				
 
-		        "<p style='margin-top:20px;'>This action was processed successfully in the system.</p>" +
+	// 	        "<p style='margin-top:20px;'>This action was processed successfully in the system.</p>" +
 
-		        "<p style='margin-top:30px;'>Regards,<br><b>GNS Team</b></p>" +
+	// 	        "<p style='margin-top:30px;'>Regards,<br><b>GNS Team</b></p>" +
 
-		        "</div></body></html>";
+	// 	        "</div></body></html>";
 		
-		return adminHtml;
-	}
+	// 	return adminHtml;
+	// }
+
+	public String cancelTicketToAdminTemplate(Long bookingId, List<String> seats, int amount, String userEmail) {
+
+    String seatDetails = String.join(", ", seats);
+
+    String adminHtml = "<html>" +
+            "<body style='font-family: Arial; background:#f4f4f4; padding:20px;'>" +
+
+            "<div style='max-width:600px; margin:auto; background:#fff; padding:25px; border-radius:10px;'>" +
+
+            "<h2 style='color:#e67e22;'>Seat Cancellation - Admin Notification</h2>" +
+
+            "<p>Hello Admin,</p>" +
+
+            "<p>The following seats have been <b style='color:red;'>cancelled</b> " +
+            "<b>as per the user's request</b>.</p>" +
+
+            "<table style='width:100%; border-collapse:collapse; margin-top:20px; font-size:14px;'>" +
+
+            "<tr>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>User Email</b></td>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + userEmail + "</td>" +
+            "</tr>" +
+
+            "<tr>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Booking ID</b></td>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + bookingId + "</td>" +
+            "</tr>" +
+
+            "<tr>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Cancelled Seats</b></td>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'>" + seatDetails + "</td>" +
+            "</tr>" +
+
+            "<tr>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'><b>Total Refund</b></td>" +
+            "<td style='padding:8px; border-bottom:1px solid #ddd;'>₹" + amount + "</td>" +
+            "</tr>" +
+
+            "</table>" +
+
+            // 🔥 ADDED LINE
+            "<p style='margin-top:15px; color:#555; font-size:13px;'>" +
+            "Note: Refund processing is subject to the original payment status." +
+            "</p>" +
+
+            "<p style='margin-top:20px;'>This action was processed successfully in the system.</p>" +
+
+            "<p style='margin-top:30px;'>Regards,<br><b>GNS Team</b></p>" +
+
+            "</div></body></html>";
+
+    return adminHtml;
+}
 	
 	
 
