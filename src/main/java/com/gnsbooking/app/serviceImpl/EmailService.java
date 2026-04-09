@@ -172,7 +172,7 @@ public class EmailService {
             sender.put("email", "ticket4naach@gmail.com");
 
             Map<String, String> to = new HashMap<>();
-            to.put("email", booking.getUser().getEmail());
+            to.put("email", "gurudevnatrajstudio@gmail.com");
             body.put("sender", sender);
             body.put("to", Collections.singletonList(to));
             body.put("subject", "Admin Alert: Seats Cancelled as per User Request (Booking ID: " + booking.getBkngId() + ")");
