@@ -27,7 +27,7 @@ public class EmailService {
     @Value("${brevo.api.key}")
     private String apiKey;
 
-    private static final String URL = "https://api.brevo.com/v3/emailCampaigns";
+   	private static final String URL = "https://api.brevo.com/v3/smtp/email";
 
     @Async
     public void sendOtpEmail(String toEmail, String otp) {
