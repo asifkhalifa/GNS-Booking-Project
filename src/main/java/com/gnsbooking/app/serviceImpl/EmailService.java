@@ -38,7 +38,7 @@ public class EmailService {
 
             Map<String, String> sender = new HashMap<>();
             sender.put("name", "GNS Booking");
-            sender.put("email", "ticket4naach@gmail.com");
+            sender.put("email", "asifkhalifa201@gmail.com");
 
             Map<String, String> to = new HashMap<>();
             to.put("email", toEmail);
@@ -71,7 +71,7 @@ public class EmailService {
 
             Map<String, String> sender = new HashMap<>();
             sender.put("name", "GNS Booking");
-            sender.put("email", "ticket4naach@gmail.com");
+            sender.put("email", "asifkhalifa201@gmail.com");
 
             Map<String, String> to = new HashMap<>();
             to.put("email", email);
@@ -104,7 +104,7 @@ public class EmailService {
 
             Map<String, String> sender = new HashMap<>();
             sender.put("name", "GNS Booking");
-            sender.put("email", "ticket4naach@gmail.com");
+            sender.put("email", "asifkhalifa201@gmail.com");
 
             Map<String, String> to = new HashMap<>();
             to.put("email", email);
@@ -137,7 +137,7 @@ public class EmailService {
 
             Map<String, String> sender = new HashMap<>();
             sender.put("name", "GNS Booking");
-            sender.put("email", "ticket4naach@gmail.com");
+            sender.put("email", "asifkhalifa201@gmail.com");
 
             Map<String, String> to = new HashMap<>();
             to.put("email", booking.getUser().getEmail());
@@ -169,10 +169,10 @@ public class EmailService {
 
             Map<String, String> sender = new HashMap<>();
             sender.put("name", "GNS Booking");
-            sender.put("email", "ticket4naach@gmail.com");
+            sender.put("email", "asifkhalifa201@gmail.com");
 
             Map<String, String> to = new HashMap<>();
-            to.put("email", "gurudevnatrajstudio@gmail.com");
+            to.put("email", "asifkhalifa20@gmail.com");
             body.put("sender", sender);
             body.put("to", Collections.singletonList(to));
             body.put("subject", "Admin Alert: Seats Cancelled as per User Request (Booking ID: " + booking.getBkngId() + ")");
